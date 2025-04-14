@@ -90,30 +90,39 @@ public class Main {
 
             case 3:
 
-                //get monthly payment user receive
-                System.out.print("What is the monthly payment you receive?: ");
-                float payment = scanner.nextFloat();
+                // Present value of an ordinary annuity formula: PV = PMT * ((1-(1+r)^-n)/r)
 
-                //get how many years user want to receive payment
-                System.out.print("For how many years do you want to receive the payment?: ");
-                int years = scanner.nextInt();
+                // get user's payment per period amount
+                System.out.print("What is your estimated payment per period would like to receive?: ");
+                float estimated_payment;
+                estimated_payment = scanner.nextFloat();
 
-                //get the annual interest rate user will get
-                System.out.print("What is the annual interest rate?: ");
-                float annual = scanner.nextFloat();
+                // get the annual interest rate
+                System.out.print("What is the estimated annual interest rate?: ");
+                float annual_interest;
+                annual_interest = scanner.nextFloat();
 
-                //change annual interest to monthly rate
-                float monthly = annual / 100 / 12;
+                // convert annual interest rate to monthly interest rate by dividing with 12 * 100
+                float monthly_interest;
+                monthly_interest = annual_interest / (12 * 100);
 
-                //get total number of months form user's year choice
-                int total_months = years * 12;
+                // get estimated year of user to keep the money
+                System.out.print("How many years you would like to keep the money?: ");
+                float estimated_year;
+                estimated_year = scanner.nextFloat();
 
-                //calculate present value of the annuity
-                double PV = payment * (1 - Math.pow(1 + monthly, -total_months)) / monthly;
+                // convert to month because we will calculate in month
+                float estimated_month = estimated_year * 12;
 
-                // show the result
-                System.out.printf("To receive $%.2f monthly for %d years at %.2f%% interest,\n", payment, years, annual);
-                System.out.printf("you need to invest $%.2f today.\n", PV);
+                // calculate the power part first of calculation
+                double upper_part;
+                upper_part = (1- Math.pow(1+monthly_interest, (-estimated_month)));
+
+                // calculate the present value
+                double present_value = estimated_payment * (upper_part)/monthly_interest;
+                System.out.printf("Your present value is %.2f", present_value);
+
+                break;
 
             default:
 
