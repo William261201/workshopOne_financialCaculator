@@ -11,43 +11,43 @@ public class Main {
                 What would you like to calculate?
                 You can chose Mortgage for 1, Future Value for 2, Present Value for 3.\s""");
 
-        int user_choice;
-        user_choice = scanner.nextInt();
+        int userChoice;
+        userChoice = scanner.nextInt();
 
-        switch(user_choice) {
+        switch(userChoice) {
 
             case 1:
 
                 ///get user's loan amount input with a variable 'LoanAmount'
                 System.out.print("What is the loan amount?: ");
-                int LoanAmount = scanner.nextInt();
+                int loanAmount = scanner.nextInt();
                 //System.out.print(P);
 
                 ///get how many months the payment would be
                 System.out.print("How many years are you paying this amount?: ");
-                int payment_years = scanner.nextInt();
+                int paymentYears = scanner.nextInt();
                 //change payment years to months and store the value with 'MonthlyRate'
-                int PaymentMonth = payment_years * 12;
+                int paymentMonth = paymentYears * 12;
                 //System.out.print(n);
 
                 /// get user's monthly interest rate with a variable 'interest_rate'
                 ///calculate annual rate first then divide by 12 to get monthly interest rate
                 System.out.print("What is the annual interest rate?: ");
-                double annual_interest_percentage = scanner.nextFloat();
-                double MonthlyRate = annual_interest_percentage/(12*100);
+                double annualInterestPercentage = scanner.nextFloat();
+                double MonthlyRate = annualInterestPercentage/(12*100);
                 //System.out.print(r);
 
                 ///calculate the monthly payment
                 double M;
-                double interest_rate_power = Math.pow((1+MonthlyRate), PaymentMonth);
-                M = (LoanAmount * MonthlyRate * interest_rate_power)/(interest_rate_power - 1);
+                double interestRatePower = Math.pow((1+MonthlyRate), paymentMonth);
+                M = (loanAmount * MonthlyRate * interestRatePower)/(interestRatePower - 1);
 
                 //print out monthly payment amount for user's loan
-                System.out.printf("Your monthly payment for loan %d is %.2f\n", LoanAmount, M );
+                System.out.printf("Your monthly payment for loan %d is %.2f\n", loanAmount, M );
 
                 ///calculate total payment and print out the amount
-                double Total_paid = M * PaymentMonth;
-                System.out.printf("The total payment after %d year is %.2f", payment_years, Total_paid);
+                double totalPaid = M * paymentMonth;
+                System.out.printf("The total payment after %d year is %.2f", paymentYears, totalPaid);
 
                 break;
 
@@ -60,9 +60,9 @@ public class Main {
 
                 //get the percentage of that user would earn annually
                 System.out.print("What is annual interest rate?: ");
-                float annual_rate;
-                float rate_percentage = scanner.nextFloat();
-                annual_rate = (rate_percentage/100);
+                float annualRate;
+                float ratePercentage = scanner.nextFloat();
+                annualRate = (ratePercentage/100);
 
                 //get the number of time interest is compound per year
                 //System.out.print("What is the number of times the interest will compound per year?: ");
@@ -77,7 +77,7 @@ public class Main {
                 /// Start calculating the future compounding value
                 float compound;
                 float power = 12 * time;
-                compound = (float) (deposit * Math.pow((1 + annual_rate/12), power));
+                compound = (float) (deposit * Math.pow((1 + annualRate/12), power));
 
                 //Print out the future value
                 System.out.printf("Your future value is %.2f ", compound);
@@ -94,33 +94,33 @@ public class Main {
 
                 // get user's payment per period amount
                 System.out.print("What is your estimated payment per period would like to receive?: ");
-                float estimated_payment;
-                estimated_payment = scanner.nextFloat();
+                float estimatedPayment;
+                estimatedPayment = scanner.nextFloat();
 
                 // get the annual interest rate
                 System.out.print("What is the estimated annual interest rate?: ");
-                float annual_interest;
-                annual_interest = scanner.nextFloat();
+                float annualInterest;
+                annualInterest = scanner.nextFloat();
 
                 // convert annual interest rate to monthly interest rate by dividing with 12 * 100
-                float monthly_interest;
-                monthly_interest = annual_interest / (12 * 100);
+                float monthlyInterest;
+                monthlyInterest = annualInterest / (12 * 100);
 
                 // get estimated year of user to keep the money
                 System.out.print("How many years you would like to keep the money?: ");
-                float estimated_year;
-                estimated_year = scanner.nextFloat();
+                float estimatedYear;
+                estimatedYear = scanner.nextFloat();
 
                 // convert to month because we will calculate in month
-                float estimated_month = estimated_year * 12;
+                float estimatedMonth = estimatedYear * 12;
 
                 // calculate the power part first of calculation
-                double upper_part;
-                upper_part = (1- Math.pow(1+monthly_interest, (-estimated_month)));
+                double upperPart;
+                upperPart = (1- Math.pow(1+monthlyInterest, (-estimatedMonth)));
 
                 // calculate the present value
-                double present_value = estimated_payment * (upper_part)/monthly_interest;
-                System.out.printf("Your present value is %.2f", present_value);
+                double presentValue = estimatedYear * (upperPart)/monthlyInterest;
+                System.out.printf("Your present value is %.2f", presentValue);
 
                 break;
 
